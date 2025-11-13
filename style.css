@@ -322,3 +322,11 @@ body.dark .btn-icon:hover {
 body.dark .stat-item {
   border-right-color: #495057;
 }
+
+body { font-family: sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+.container { max-width: 900px; margin: auto; padding: 1rem; }
+header { display: flex; justify-content: space-between; align-items: center; }
+button { cursor: pointer; padding: 0.5rem 1rem; margin: 0.3rem; }
+.dark { background: #222; color: #eee; }
+#auth { max-width: 400px; margin: 50px auto; display: flex; flex-direction: column; }
+#auth input { margin: 0.5rem 0; padding: 0.5rem; }

@@ -3,46 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up - Media Tracker</title>
+<title>Sign Up - Personal Media Tracker</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="auth-container">
-  <h1>🎬 Personal Media Tracker</h1>
-  <form id="signupForm">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit" id="signupBtn">Sign Up</button>
-    <p>Already have an account? <a href="index.html">Login here</a></p>
-    <p id="signupStatus" class="status-message"></p>
-  </form>
+<div id="auth">
+  <h1>Sign Up</h1>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button id="signupBtn">Sign Up</button>
+  <p>Already have an account? <a href="index.html">Login here</a></p>
 </div>
 
 <script type="module">
 import { auth, createUserWithEmailAndPassword } from './app.js';
 
-const signupForm = document.getElementById('signupForm');
-const signupBtn = document.getElementById('signupBtn');
-const statusMessage = document.getElementById('signupStatus');
-
-signupForm.addEventListener('submit', async (e) => {
+document.getElementById('signupBtn').addEventListener('click', async (e) => {
   e.preventDefault();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  
-  if (!email || !password) return;
-
-  signupBtn.disabled = true;
-  statusMessage.textContent = 'Creating account...';
-
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-    statusMessage.textContent = 'Account created! Redirecting...';
     window.location.href = '/dashboard.html';
   } catch(err) {
-    statusMessage.textContent = err.message;
-  } finally {
-    signupBtn.disabled = false;
+    alert(err.message);
   }
 });
 </script>
