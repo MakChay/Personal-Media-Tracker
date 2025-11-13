@@ -38,7 +38,7 @@ loginForm.addEventListener('submit', async (e) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
     statusMessage.textContent = 'Login successful! Redirecting...';
-    window.location.href = '/dashboard.html';
+    window.location.href = 'dashboard.html';
   } catch(err) {
     statusMessage.textContent = err.message;
   } finally {

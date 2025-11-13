@@ -1,192 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - Personal Media Tracker</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Personal Media Tracker</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div id="auth">
-  <h1>Login</h1>
-  <input type="email" id="email" placeholder="Email" required>
-  <input type="password" id="password" placeholder="Password" required>
-  <button id="loginBtn">Login</button>
-  <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-</div>
-
-<script type="module">
-import { auth, signInWithEmailAndPassword } from './app.js';
-
-document.getElementById('loginBtn').addEventListener('click', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = '/dashboard.html';
-  } catch(err) {
-    alert(err.message);
-  }
-});
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Personal Media Tracker</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-  <header class="dashboard-header">
-    <h1>🎬 Personal Media Tracker</h1>
-    <div class="header-actions">
-      <p id="welcomeMessage">Welcome!</p>
-      <button id="themeToggle" class="btn-secondary">🌙 Dark Mode</button>
-      <button id="logoutBtn" class="btn-primary">Logout</button>
-    </div>
-  </header>
-
-  <main class="dashboard-grid">
-    <section class="stats-panel card">
-      <h2>Your Statistics</h2>
-      <div class="stat-items">
-        <div class="stat-item"><span id="totalMovies">0</span>Movies</div>
-        <div class="stat-item"><span id="totalTVShows">0</span>TV Shows</div>
-        <div class="stat-item"><span id="totalBooks">0</span>Books</div>
-        <div class="stat-item"><span id="totalMusic">0</span>Music</div>
+  <div class="container">
+    <header class="dashboard-header">
+      <h1>🎬 Personal Media Tracker</h1>
+      <div class="header-actions">
+        <p id="welcomeMessage">Welcome!</p>
+        <button id="themeToggle" class="btn-secondary">🌙 Dark Mode</button>
+        <button id="logoutBtn" class="btn-primary">Logout</button>
       </div>
-    </section>
+    </header>
 
-    <section class="add-media card">
-      <h2>Add New Media</h2>
-      <form id="mediaForm">
-        <input type="text" id="title" placeholder="Media Title" required>
-        <select id="type">
-          <option value="Movie">Movie</option>
-          <option value="TV Show">TV Show</option>
-          <option value="Book">Book</option>
-          <option value="Music">Music</option>
-        </select>
-        <button type="submit">Add to Tracker</button>
-      </form>
-    </section>
+    <main class="dashboard-grid">
+      <!-- Stats Panel -->
+      <section class="stats-panel card">
+        <h2>Your Statistics</h2>
+        <div class="stat-items">
+          <div class="stat-item"><span id="totalMovies">0</span> Movies</div>
+          <div class="stat-item"><span id="totalTVShows">0</span> TV Shows</div>
+          <div class="stat-item"><span id="totalBooks">0</span> Books</div>
+          <div class="stat-item"><span id="totalMusic">0</span> Music</div>
+        </div>
+      </section>
 
-    <section class="media-section">
-      <div class="controls-bar">
-        <input type="text" id="search" placeholder="Search by title...">
-        <select id="filter">
-          <option value="All">All Types</option>
-          <option value="Movie">Movie</option>
-          <option value="TV Show">TV Show</option>
-          <option value="Book">Book</option>
-          <option value="Music">Music</option>
-        </select>
-        <select id="sort">
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="highest">Highest Rating</option>
-        </select>
-      </div>
-      <ul id="mediaList"></ul>
-    </section>
-  </main>
-</div>
+      <!-- Add New Media -->
+      <section class="add-media card">
+        <h2>Add New Media</h2>
+        <form id="mediaForm">
+          <input type="text" id="title" placeholder="Media Title" required />
+          <select id="type">
+            <option value="Movie">Movie</option>
+            <option value="TV Show">TV Show</option>
+            <option value="Book">Book</option>
+            <option value="Music">Music</option>
+          </select>
+          <button type="submit">Add to Tracker</button>
+        </form>
+      </section>
 
-<script type="module">
-import { auth, onAuthStateChanged, collection, addDoc, getDocs, query, where, setDoc, doc, deleteDoc } from './app.js';
+      <!-- Media Section -->
+      <section class="media-section card">
+        <div class="controls-bar">
+          <input type="text" id="search" placeholder="Search by title..." />
+          <select id="filter">
+            <option value="All">All Types</option>
+            <option value="Movie">Movie</option>
+            <option value="TV Show">TV Show</option>
+            <option value="Book">Book</option>
+            <option value="Music">Music</option>
+          </select>
+          <select id="sort">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="highest">Highest Rating</option>
+          </select>
+        </div>
+        <div id="mediaList"></div>
+      </section>
+    </main>
+  </div>
 
-let currentUser = null;
-let mediaArray = [];
-
-const welcomeMessage = document.getElementById('welcomeMessage');
-const logoutBtn = document.getElementById('logoutBtn');
-const themeToggle = document.getElementById('themeToggle');
-const mediaForm = document.getElementById('mediaForm');
-const mediaList = document.getElementById('mediaList');
-const filter = document.getElementById('filter');
-const search = document.getElementById('search');
-const sort = document.getElementById('sort');
-const totalMovies = document.getElementById('totalMovies');
-const totalTVShows = document.getElementById('totalTVShows');
-const totalBooks = document.getElementById('totalBooks');
-const totalMusic = document.getElementById('totalMusic');
-
-// Redirect if not logged in
-onAuthStateChanged(auth, user => {
-  if (!user) window.location.href = '/index.html';
-  else {
-    currentUser = user;
-    welcomeMessage.textContent = `Welcome, ${user.email}!`;
-    loadUserMedia();
-  }
-});
-
-// Logout
-logoutBtn.addEventListener('click', async () => {
-  await auth.signOut();
-  window.location.href = '/index.html';
-});
-
-// Dark/light mode
-if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-});
-
-// Load and render media
-async function loadUserMedia() {
-  mediaArray = [];
-  const q = query(collection(db, 'media'), where('uid', '==', currentUser.uid));
-  const snap = await getDocs(q);
-  snap.forEach(docSnap => mediaArray.push({ id: docSnap.id, ...docSnap.data() }));
-  renderMedia();
-}
-
-function renderMedia() {
-  mediaList.innerHTML = '';
-  const filtered = mediaArray.filter(m =>
-    (filter.value === 'All' || m.type === filter.value) &&
-    m.title.toLowerCase().includes(search.value.toLowerCase())
-  );
-  filtered.forEach(media => {
-    const li = document.createElement('li');
-    li.textContent = `${media.title} (${media.type})`;
-    mediaList.appendChild(li);
-  });
-
-  totalMovies.textContent = mediaArray.filter(m => m.type === 'Movie').length;
-  totalTVShows.textContent = mediaArray.filter(m => m.type === 'TV Show').length;
-  totalBooks.textContent = mediaArray.filter(m => m.type === 'Book').length;
-  totalMusic.textContent = mediaArray.filter(m => m.type === 'Music').length;
-}
-
-// Add media
-mediaForm.addEventListener('submit', async e => {
-  e.preventDefault();
-  const title = document.getElementById('title').value;
-  const type = document.getElementById('type').value;
-  const docRef = await addDoc(collection(db, 'media'), {
-    uid: currentUser.uid,
-    title,
-    type,
-    rating: 0,
-    createdAt: Date.now()
-  });
-  mediaArray.push({ id: docRef.id, uid: currentUser.uid, title, type, rating: 0, createdAt: Date.now() });
-  mediaForm.reset();
-  renderMedia();
-});
-
-// Filters & search
-filter.addEventListener('change', renderMedia);
-search.addEventListener('input', renderMedia);
-sort.addEventListener('change', renderMedia);
-</script>
+  <!-- Link to your Firebase dashboard logic -->
+  <script type="module" src="./app.js"></script>
 </body>
 </html>

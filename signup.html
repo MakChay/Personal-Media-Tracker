@@ -16,7 +16,7 @@
 </div>
 
 <script type="module">
-import { auth, createUserWithEmailAndPassword } from './app.js';
+import { auth, createUserWithEmailAndPassword } from 'app.js';
 
 document.getElementById('signupBtn').addEventListener('click', async (e) => {
   e.preventDefault();
@@ -24,7 +24,7 @@ document.getElementById('signupBtn').addEventListener('click', async (e) => {
   const password = document.getElementById('password').value;
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-    window.location.href = '/dashboard.html';
+    window.location.href = 'dashboard.html';
   } catch(err) {
     alert(err.message);
   }

@@ -40,14 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
       loadUserMedia();
     } else {
       currentUser = null;
-      window.location.href = '/index.html'; // redirect if not logged in
+      window.location.href = 'index.html'; // redirect if not logged in
     }
   });
 
   // Logout
   if (logoutBtn) logoutBtn.addEventListener('click', async () => {
     await signOut(auth);
-    window.location.href = "/index.html";
+    window.location.href = "index.html";
   });
 
   // Dark/Light mode
