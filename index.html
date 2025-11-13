@@ -7,26 +7,42 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="auth">
-  <h1>Login</h1>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+<div class="auth-container">
+  <h1>🎬 Personal Media Tracker</h1>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit" id="loginBtn">Login</button>
+    <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    <p id="loginStatus" class="status-message"></p>
+  </form>
 </div>
 
 <script type="module">
 import { auth, signInWithEmailAndPassword } from './app.js';
 
-document.getElementById('loginBtn').addEventListener('click', async (e) => {
+const loginForm = document.getElementById('loginForm');
+const loginBtn = document.getElementById('loginBtn');
+const statusMessage = document.getElementById('loginStatus');
+
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  
+  if (!email || !password) return;
+
+  loginBtn.disabled = true;
+  statusMessage.textContent = 'Logging in...';
+
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    statusMessage.textContent = 'Login successful! Redirecting...';
     window.location.href = '/dashboard.html';
   } catch(err) {
-    alert(err.message);
+    statusMessage.textContent = err.message;
+  } finally {
+    loginBtn.disabled = false;
   }
 });
 </script>
