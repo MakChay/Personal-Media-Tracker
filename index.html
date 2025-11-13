@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Media Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🎬 Personal Media Tracker</h1>
+  
+  <form id="mediaForm">
+    <input type="text" id="title" placeholder="Media Title" required>
+    <select id="type">
+      <option value="Movie">Movie</option>
+      <option value="TV Show">TV Show</option>
+      <option value="Book">Book</option>
+      <option value="Music">Music</option>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+
+  <ul id="mediaList"></ul>
+
+  <script src="app.js"></script>
+</body>
+</html>
