@@ -8,17 +8,15 @@
 </head>
 <body>
 <div class="container">
-  <!-- Header -->
   <header class="dashboard-header">
     <h1>🎬 Personal Media Tracker</h1>
     <div class="header-actions">
-      <p id="welcomeMessage">Welcome!</p>
-      <button id="themeToggle" class="btn-secondary">🌙 Dark Mode</button>
-      <button id="logoutBtn" class="btn-primary">Logout</button>
+      <p id="welcomeMessage" class="welcome-text">Welcome!</p>
+      <button id="themeToggle" class="btn-icon">🌙</button>
+      <button id="logoutBtn" class="btn-danger">Logout</button>
     </div>
   </header>
 
-  <!-- Stats -->
   <section class="stats-panel card">
     <h2>Your Statistics</h2>
     <div class="stat-items">
@@ -41,44 +39,45 @@
     </div>
   </section>
 
-  <!-- Add Media -->
-  <section class="add-media card">
-    <h2>Add New Media</h2>
-    <form id="mediaForm" class="input-grid">
-      <input type="text" id="title" placeholder="Media Title" required>
-      <select id="type">
-        <option value="Movie">Movie</option>
-        <option value="TV Show">TV Show</option>
-        <option value="Book">Book</option>
-        <option value="Music">Music</option>
-      </select>
-      <button type="submit" class="btn-full-width">Add to Tracker</button>
-      <p id="mediaStatus" class="status-message"></p>
-    </form>
-  </section>
+  <main class="dashboard-main-grid">
+    <section class="media-section">
+      <div class="controls-bar">
+        <h2>Your Tracker List</h2>
+        <div class="controls-group">
+          <input type="text" id="search" placeholder="Search title...">
+          <select id="filter">
+            <option value="All">All Types</option>
+            <option value="Movie">Movie</option>
+            <option value="TV Show">TV Show</option>
+            <option value="Book">Book</option>
+            <option value="Music">Music</option>
+          </select>
+          <select id="sort">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="highest">Highest Rating</option>
+          </select>
+        </div>
+      </div>
+      <ul class="media-list-grid" id="mediaList"></ul>
+    </section>
 
-  <!-- Media List -->
-  <section class="media-section">
-    <div class="controls-bar">
-      <h2>Your Tracker List</h2>
-      <div class="controls-group">
-        <input type="text" id="search" placeholder="Search by title...">
-        <select id="filter">
-          <option value="All">All Types</option>
+    <section class="add-media card">
+      <h2>Add New Media</h2>
+      <form id="mediaForm" class="form-vertical">
+        <input type="text" id="title" placeholder="Media Title" required>
+        <select id="type">
           <option value="Movie">Movie</option>
           <option value="TV Show">TV Show</option>
           <option value="Book">Book</option>
           <option value="Music">Music</option>
         </select>
-        <select id="sort">
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="highest">Highest Rating</option>
-        </select>
-      </div>
-    </div>
-    <ul class="media-list-grid" id="mediaList"></ul>
-  </section>
+        <button type="submit" class="btn-primary">Add to Tracker</button>
+        <p id="mediaStatus" class="status-message"></p>
+      </form>
+    </section>
+  </main>
+
 </div>
 
 <script type="module" src="app.js"></script>

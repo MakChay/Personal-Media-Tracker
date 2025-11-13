@@ -1,18 +1,25 @@
 /* --- 1. GENERAL STYLING & RESET --- */
 :root {
-  --primary-color: #3498db; /* Blue */
-  --secondary-color: #2ecc71; /* Green */
-  --text-color: #2c3e50;
-  --bg-color-light: #f4f7f9;
-  --card-bg-light: #ffffff;
-  --border-color: #ecf0f1;
-  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Color Palette - Vibrant & Professional */
+  --color-brand: #007bff; /* Primary Blue */
+  --color-success: #28a745; /* Green for adds */
+  --color-warning: #ffc107; /* Yellow for ratings */
+  --color-danger: #dc3545; /* Red for deletion */
+  --color-text: #343a40;
+  --color-subtle: #6c757d;
 
-  /* Dark Mode Variables */
-  --text-color-dark: #ecf0f1;
-  --bg-color-dark: #2c3e50; /* Deep blue/charcoal */
-  --card-bg-dark: #34495e; /* Slightly lighter charcoal */
-  --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* Light Theme */
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-color: #e9ecef;
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+
+  /* Dark Theme */
+  --dark-bg: #212529;
+  --dark-card-bg: #343a40;
+  --dark-text: #f8f9fa;
+  --dark-border: #495057;
+  --dark-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -22,180 +29,202 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color-light);
-  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--color-text);
   line-height: 1.6;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* --- 2. TYPOGRAPHY --- */
 h1, h2 {
-  color: var(--primary-color);
-  margin-bottom: 15px;
+  color: var(--color-brand);
+  font-weight: 700;
 }
 
-/* --- 2. AUTH PAGES STYLING (Login/Signup) --- */
-.auth-container h1 {
-  text-align: center;
-  margin-bottom: 30px;
+h1 {
+  font-size: 2rem;
 }
 
-#auth {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: var(--card-bg-light);
-  border-radius: 12px;
-  box-shadow: var(--shadow-light);
-  text-align: center;
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* --- 3. INPUTS & BUTTONS --- */
-input:not(.file-input), select, button {
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  font-size: 1rem;
-  width: 100%;
-  transition: all 0.2s ease;
+a {
+  color: var(--color-brand);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
-button {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-}
-
-.btn-primary:hover, .btn-secondary:hover {
-  opacity: 0.9;
-}
-
-.btn-small {
-  padding: 6px 10px;
-  font-size: 0.85rem;
-  width: auto;
-}
-
-.btn-edit { background-color: #f39c12; color: white; }
-.btn-delete { background-color: #e74c3c; color: white; }
-
-/* --- 4. DASHBOARD LAYOUT --- */
+/* --- 3. COMPONENTS --- */
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .card {
-  background-color: var(--card-bg-light);
+  background-color: var(--card-bg);
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: var(--shadow-light);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
 }
 
+/* Form Controls */
+input:not([type="checkbox"]), select, button {
+  padding: 0.75rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+}
+
+.btn-primary {
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: var(--border-color);
+  color: var(--color-text);
+  border: none;
+  font-size: 1.2rem;
+  box-shadow: none;
+}
+.btn-icon:hover {
+  background-color: #dee2e6;
+}
+
+.status-message {
+  margin-top: 10px;
+  font-weight: 500;
+  color: var(--color-danger);
+}
+
+/* --- 4. AUTH PAGES (Login/Signup) --- */
+.auth-container {
+  max-width: 400px;
+  margin: 10vh auto;
+  padding: 40px;
+  text-align: center;
+  background-color: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+  margin-bottom: 30px;
+}
+
+/* --- 5. DASHBOARD LAYOUT --- */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0 30px 0;
+  padding: 10px 0;
+  margin-bottom: 20px;
 }
 
 .header-actions {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
 }
 
-/* Main Dashboard Grid */
-.dashboard-grid {
+.welcome-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-subtle);
+}
+
+/* Main Grid Layout */
+.dashboard-main-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
 }
 
-@media (min-width: 900px) {
-  .dashboard-grid {
-    grid-template-columns: 2fr 1fr; /* Two main columns */
-    grid-template-areas: 
-      "stats stats"
-      "media add-media";
+@media (min-width: 992px) {
+  .dashboard-main-grid {
+    grid-template-columns: 3fr 1fr; /* List is 3/4 width, Add Media is 1/4 */
   }
-  .stats-panel { grid-area: stats; }
-  .add-media { grid-area: add-media; }
-  .media-section { grid-area: media; }
 }
 
-/* --- 5. STATS PANEL --- */
+/* --- 6. STATS PANEL --- */
 .stats-panel {
-  /* Use Flexbox for stat items */
-  padding: 25px;
+  margin-bottom: 30px;
 }
-
 .stat-items {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  text-align: center;
+  justify-content: space-between;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .stat-item {
+  text-align: center;
+  padding: 10px 0;
+  flex: 1;
   min-width: 100px;
+  border-right: 1px solid var(--border-color);
+}
+.stat-item:last-child {
+  border-right: none;
 }
 
 .stat-value {
   display: block;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--color-success);
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: #7f8c8d;
+  color: var(--color-subtle);
+  text-transform: uppercase;
 }
-
-/* --- 6. ADD MEDIA FORM --- */
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.input-grid input[type="text"], .input-grid select, .input-grid .file-input {
-  grid-column: span 1;
-}
-
-.btn-full-width {
-  grid-column: 1 / -1; /* spans all columns */
-  background-color: var(--secondary-color);
-  color: white;
-}
-
-@media (max-width: 600px) {
-  .input-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 
 /* --- 7. MEDIA LIST & CONTROLS --- */
 .controls-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .controls-group {
@@ -204,77 +233,92 @@ button {
 }
 
 .controls-group input, .controls-group select {
-  width: 150px;
+  width: auto;
+  min-width: 120px;
+  margin-bottom: 0;
 }
 
-/* Media Card Grid */
+/* Media Cards */
 .media-list-grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   padding: 0;
 }
 
 .media-card {
   display: flex;
-  flex-direction: column;
-  background-color: var(--card-bg-light);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: var(--card-bg);
+  border-left: 5px solid var(--color-brand);
 }
 
-.media-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-light);
+.card-info {
+  flex-grow: 1;
 }
 
-.card-content {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.card-type {
+  font-size: 0.9rem;
+  color: var(--color-subtle);
+  display: inline-block;
+  margin-left: 5px;
 }
 
 .rating-stars {
-  font-size: 1.2rem;
-  color: #f1c40f; /* Gold for stars */
+  font-size: 1.4rem;
+  color: var(--color-warning);
+}
+.star {
+  cursor: pointer;
+  transition: color 0.1s;
 }
 
 .card-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 5px;
+  gap: 5px;
+  margin-left: 15px;
 }
 
 /* --- 8. DARK MODE --- */
 body.dark {
-  background-color: var(--bg-color-dark);
-  color: var(--text-color-dark);
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
 }
 
-body.dark h1, body.dark h2 {
-  color: var(--primary-color);
+body.dark .card, body.dark .auth-container, body.dark .media-card {
+  background-color: var(--dark-card-bg);
+  box-shadow: var(--dark-shadow);
 }
 
-body.dark .card, body.dark #auth, body.dark .media-card {
-  background-color: var(--card-bg-dark);
-  box-shadow: var(--shadow-dark);
+body.dark .welcome-text, body.dark .stat-label, body.dark .card-type {
+  color: #adb5bd;
 }
 
-body.dark .stat-label {
-  color: #bdc3c7;
+body.dark input, body.dark select {
+  background-color: #495057;
+  color: var(--dark-text);
+  border-color: #6c757d;
 }
 
-body.dark input:not(.file-input), body.dark select {
-  background-color: #4a6582;
-  color: var(--text-color-dark);
-  border-color: #5a7b9c;
+body.dark .btn-icon {
+  background-color: var(--dark-border);
+  color: var(--dark-text);
+}
+body.dark .btn-icon:hover {
+  background-color: #495057;
 }
 
-body.dark a {
-  color: var(--secondary-color);
+body.dark .stat-item {
+  border-right-color: #495057;
 }
