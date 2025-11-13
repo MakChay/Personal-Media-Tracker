@@ -1,51 +1,280 @@
-body {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #fdf6e3;
-  color: #333;
+/* --- 1. GENERAL STYLING & RESET --- */
+:root {
+  --primary-color: #3498db; /* Blue */
+  --secondary-color: #2ecc71; /* Green */
+  --text-color: #2c3e50;
+  --bg-color-light: #f4f7f9;
+  --card-bg-light: #ffffff;
+  --border-color: #ecf0f1;
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Dark Mode Variables */
+  --text-color-dark: #ecf0f1;
+  --bg-color-dark: #2c3e50; /* Deep blue/charcoal */
+  --card-bg-dark: #34495e; /* Slightly lighter charcoal */
+  --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-h1 {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color-light);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+h1, h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+/* --- 2. AUTH PAGES STYLING (Login/Signup) --- */
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#auth {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: var(--card-bg-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
   text-align: center;
 }
 
-form {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-input, select, button {
-  padding: 0.5rem;
+/* --- 3. INPUTS & BUTTONS --- */
+input:not(.file-input), select, button {
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
   font-size: 1rem;
+  width: 100%;
+  transition: all 0.2s ease;
 }
 
 button {
   cursor: pointer;
+  font-weight: bold;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
 }
 
-li {
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  width: auto;
+}
+
+.btn-edit { background-color: #f39c12; color: white; }
+.btn-delete { background-color: #e74c3c; color: white; }
+
+/* --- 4. DASHBOARD LAYOUT --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--card-bg-light);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+}
+
+.dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  background-color: #e0f2f1;
-  border-radius: 5px;
+  padding: 10px 0 30px 0;
 }
 
-li button {
-  background-color: #ff5252;
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Main Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 2fr 1fr; /* Two main columns */
+    grid-template-areas: 
+      "stats stats"
+      "media add-media";
+  }
+  .stats-panel { grid-area: stats; }
+  .add-media { grid-area: add-media; }
+  .media-section { grid-area: media; }
+}
+
+/* --- 5. STATS PANEL --- */
+.stats-panel {
+  /* Use Flexbox for stat items */
+  padding: 25px;
+}
+
+.stat-items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 15px;
+}
+
+.stat-item {
+  min-width: 100px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* --- 6. ADD MEDIA FORM --- */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.input-grid input[type="text"], .input-grid select, .input-grid .file-input {
+  grid-column: span 1;
+}
+
+.btn-full-width {
+  grid-column: 1 / -1; /* spans all columns */
+  background-color: var(--secondary-color);
   color: white;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* --- 7. MEDIA LIST & CONTROLS --- */
+.controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.controls-group {
+  display: flex;
+  gap: 10px;
+}
+
+.controls-group input, .controls-group select {
+  width: 150px;
+}
+
+/* Media Card Grid */
+.media-list-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 0;
+}
+
+.media-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg-light);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 15px;
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-light);
+}
+
+.card-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating-stars {
+  font-size: 1.2rem;
+  color: #f1c40f; /* Gold for stars */
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+/* --- 8. DARK MODE --- */
+body.dark {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+body.dark h1, body.dark h2 {
+  color: var(--primary-color);
+}
+
+body.dark .card, body.dark #auth, body.dark .media-card {
+  background-color: var(--card-bg-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+body.dark .stat-label {
+  color: #bdc3c7;
+}
+
+body.dark input:not(.file-input), body.dark select {
+  background-color: #4a6582;
+  color: var(--text-color-dark);
+  border-color: #5a7b9c;
+}
+
+body.dark a {
+  color: var(--secondary-color);
 }
