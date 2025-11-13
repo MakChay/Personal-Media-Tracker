@@ -1,28 +1,20 @@
-// Import Firebase modules
+// app.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, doc, getDocs, setDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-// Firebase config
-const firebaseConfig = {
-apiKey: import.meta.env.FIREBASE_API_KEY,
-  authDomain: import.meta.env.FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.FIREBASE_APP_ID,
-  measurementId: import.meta.env.FIREBASE_MEASUREMENT_ID
-};
+import { firebaseConfig } from "./config.js";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app);
-const db = getFirestore(app);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
-export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, collection, addDoc, getDocs, query, where };
+// Export methods for login/signup pages
+export { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, collection, addDoc, getDocs, query, where, doc, setDoc, deleteDoc };
 
+// Dashboard logic
 document.addEventListener('DOMContentLoaded', () => {
   const welcomeMessage = document.getElementById('welcomeMessage');
   const logoutBtn = document.getElementById('logoutBtn');
@@ -50,13 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
       loadUserMedia();
     } else {
       currentUser = null;
+      window.location.href = '/index.html'; // redirect if not logged in
     }
   });
 
   // Logout
   if (logoutBtn) logoutBtn.addEventListener('click', async () => {
     await signOut(auth);
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
   });
 
   // Dark/Light mode
@@ -193,4 +186,3 @@ document.addEventListener('DOMContentLoaded', () => {
   if (search) search.addEventListener('input', renderMedia);
   if (sort) sort.addEventListener('change', renderMedia);
 });
-// End of app.js
