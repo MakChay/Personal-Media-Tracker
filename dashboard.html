@@ -8,6 +8,7 @@
 </head>
 <body>
   <div class="container">
+    <!-- Dashboard Header -->
     <header class="dashboard-header">
       <h1>🎬 Personal Media Tracker</h1>
       <div class="header-actions">
@@ -17,7 +18,10 @@
       </div>
     </header>
 
+    <!-- Main Dashboard Grid -->
     <main class="dashboard-grid">
+      
+      <!-- Stats Panel -->
       <section class="stats-panel card">
         <h2>Your Statistics</h2>
         <div class="stat-items">
@@ -40,6 +44,7 @@
         </div>
       </section>
 
+      <!-- Add Media Form -->
       <section class="add-media card">
         <h2>Add New Media</h2>
         <form id="mediaForm" class="input-grid">
@@ -50,10 +55,13 @@
             <option value="Book">Book</option>
             <option value="Music">Music</option>
           </select>
+          <!-- Optional image upload can be hidden/removed -->
+          <!-- <input type="file" id="image" accept="image/*" class="file-input"> -->
           <button type="submit" class="btn-full-width">Add to Tracker</button>
         </form>
       </section>
 
+      <!-- Media List Section -->
       <section class="media-section">
         <div class="controls-bar">
           <h2>Your Tracker List</h2>
@@ -75,13 +83,14 @@
         </div>
         
         <ul class="media-list-grid" id="mediaList">
-          <!-- Media cards will be injected here by JS -->
+          <!-- Media cards will be dynamically rendered here -->
         </ul>
       </section>
 
     </main>
   </div>
 
+  <!-- Firebase + App JS -->
   <script type="module" src="app.js"></script>
 </body>
 </html>

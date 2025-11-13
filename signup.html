@@ -3,94 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Personal Media Tracker</title>
+  <title>Sign Up - Personal Media Tracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Dashboard Header -->
-    <header class="dashboard-header">
-      <h1>🎬 Personal Media Tracker</h1>
-      <div class="header-actions">
-        <p id="welcomeMessage">Welcome!</p>
-        <button id="themeToggle" class="btn-secondary">🌙 Dark Mode</button>
-        <button id="logoutBtn" class="btn-primary">Logout</button>
-      </div>
-    </header>
-
-    <!-- Main Dashboard Grid -->
-    <main class="dashboard-grid">
-      
-      <!-- Stats Panel -->
-      <section class="stats-panel card">
-        <h2>Your Statistics</h2>
-        <div class="stat-items">
-          <div class="stat-item">
-            <span class="stat-value" id="totalMovies">0</span>
-            <span class="stat-label">Movies</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value" id="totalTVShows">0</span>
-            <span class="stat-label">TV Shows</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value" id="totalBooks">0</span>
-            <span class="stat-label">Books</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value" id="totalMusic">0</span>
-            <span class="stat-label">Music</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Add Media Form -->
-      <section class="add-media card">
-        <h2>Add New Media</h2>
-        <form id="mediaForm" class="input-grid">
-          <input type="text" id="title" placeholder="Media Title" required>
-          <select id="type">
-            <option value="Movie">Movie</option>
-            <option value="TV Show">TV Show</option>
-            <option value="Book">Book</option>
-            <option value="Music">Music</option>
-          </select>
-          <!-- Optional image upload can be hidden/removed -->
-          <!-- <input type="file" id="image" accept="image/*" class="file-input"> -->
-          <button type="submit" class="btn-full-width">Add to Tracker</button>
-        </form>
-      </section>
-
-      <!-- Media List Section -->
-      <section class="media-section">
-        <div class="controls-bar">
-          <h2>Your Tracker List</h2>
-          <div class="controls-group">
-            <input type="text" id="search" placeholder="Search by title...">
-            <select id="filter">
-              <option value="All">All Types</option>
-              <option value="Movie">Movie</option>
-              <option value="TV Show">TV Show</option>
-              <option value="Book">Book</option>
-              <option value="Music">Music</option>
-            </select>
-            <select id="sort">
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="highest">Highest Rating</option>
-            </select>
-          </div>
-        </div>
-        
-        <ul class="media-list-grid" id="mediaList">
-          <!-- Media cards will be dynamically rendered here -->
-        </ul>
-      </section>
-
-    </main>
+  <div class="container auth-container">
+    <h1>🎬 Personal Media Tracker</h1>
+    <div id="auth">
+      <h2>Sign Up</h2>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button id="signupBtn">Sign Up</button>
+      <p>Already have an account? <a href="index.html">Login here</a></p>
+    </div>
   </div>
-
-  <!-- Firebase + App JS -->
+  
   <script type="module" src="app.js"></script>
 </body>
 </html>
